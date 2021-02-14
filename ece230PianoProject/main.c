@@ -6,6 +6,7 @@
 #include <stdbool.h>
 
 #include "speaker.h"
+#include "buttons.h"
 
 int main(void)
 {
@@ -13,19 +14,13 @@ int main(void)
     MAP_WDT_A_holdTimer();
 
     SpeakerConfig();
-
-    //Button 2.7 Configuration
-    MAP_GPIO_setAsInputPinWithPullUpResistor(GPIO_PORT_P2, GPIO_PIN7);
-    MAP_GPIO_clearInterruptFlag(GPIO_PORT_P2, GPIO_PIN7);
-    MAP_GPIO_enableInterrupt(GPIO_PORT_P2, GPIO_PIN7);
-    MAP_Interrupt_enableInterrupt(INT_PORT2);
+    ButtonsConfig();
 
     MAP_Interrupt_enableSleepOnIsrExit();
     MAP_Interrupt_enableMaster();
 
     while (1)
     {
-        //SpeakerBasicFunction();
         MAP_PCM_gotoLPM0();
     }
 }
