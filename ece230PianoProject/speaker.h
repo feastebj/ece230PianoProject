@@ -18,6 +18,7 @@ extern "C"
  ******************************************************************************/
 
 extern void SpeakerConfig(void);
+extern void ChangeNote(void);
 extern void SpeakerBasicFunction(void);
 
 /*******************************************************************************

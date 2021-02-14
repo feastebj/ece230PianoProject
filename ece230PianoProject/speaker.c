@@ -15,36 +15,39 @@
 #include "speaker.h"
 
 const uint16_t noteHalfPeriod[3] = { NOTEA4, NOTEB4, NOTEC5 };
+static int noteIndex = 0;
 
-
-void SpeakerConfig(void){
+void SpeakerConfig(void)
+{
 //![Simple PMAP Config]
-/* Port mapper configuration register */
-const uint8_t port_mapping[] = {
+    /* Port mapper configuration register */
+    const uint8_t port_mapping[] = {
 //Port P2:
-        PMAP_NONE, PMAP_NONE, PMAP_NONE, PMAP_NONE, PMAP_TA0CCR0A, PMAP_NONE,
-        PMAP_NONE,
-        PMAP_NONE };
+            PMAP_NONE,
+            PMAP_NONE, PMAP_NONE, PMAP_NONE, PMAP_TA0CCR0A,
+            PMAP_NONE,
+            PMAP_NONE,
+            PMAP_NONE };
 //![Simple PMAP Config]
 
-/* Timer_A UpDown Configuration Parameter */
-const Timer_A_UpModeConfig upConfig = {
-TIMER_A_CLOCKSOURCE_SMCLK,              // SMCLK Clock SOurce
-        TIMER_A_CLOCKSOURCE_DIVIDER_3,          // SMCLK/1 = 3MHz
-        NOTEA4,                                    // 127 tick period
-        TIMER_A_TAIE_INTERRUPT_DISABLE,         // Disable Timer interrupt
-        TIMER_A_CCIE_CCR0_INTERRUPT_DISABLE,    // Disable CCR0 interrupt
-        TIMER_A_DO_CLEAR                        // Clear value
+    /* Timer_A UpDown Configuration Parameter */
+    const Timer_A_UpModeConfig upConfig = {
+    TIMER_A_CLOCKSOURCE_SMCLK,              // SMCLK Clock SOurce
+            TIMER_A_CLOCKSOURCE_DIVIDER_3,          // SMCLK/1 = 3MHz
+            NOTEA4,                                    // 127 tick period
+            TIMER_A_TAIE_INTERRUPT_DISABLE,         // Disable Timer interrupt
+            TIMER_A_CCIE_CCR0_INTERRUPT_DISABLE,    // Disable CCR0 interrupt
+            TIMER_A_DO_CLEAR                        // Clear value
 
-        };
+            };
 
-/* Timer_A Compare Configuration Parameter  (PWM1) */
-const Timer_A_CompareModeConfig compareConfig_PWM1 = {
-TIMER_A_CAPTURECOMPARE_REGISTER_0,          // Use CCR1
-        TIMER_A_CAPTURECOMPARE_INTERRUPT_DISABLE,   // Disable CCR interrupt
-        TIMER_A_OUTPUTMODE_TOGGLE,              // Toggle output but
-        NOTEA4                                          // 32 Duty Cycle
-        };
+    /* Timer_A Compare Configuration Parameter  (PWM1) */
+    const Timer_A_CompareModeConfig compareConfig_PWM1 = {
+    TIMER_A_CAPTURECOMPARE_REGISTER_0,          // Use CCR1
+            TIMER_A_CAPTURECOMPARE_INTERRUPT_DISABLE,   // Disable CCR interrupt
+            TIMER_A_OUTPUTMODE_TOGGLE,              // Toggle output but
+            NOTEA4                                          // 32 Duty Cycle
+            };
 
     //![Simple PMAP Example]
     /* Remapping  TACCR0 to P2.4 */
@@ -89,8 +92,6 @@ TIMER_A_CAPTURECOMPARE_REGISTER_0,          // Use CCR1
 void SpeakerBasicFunction(void)
 {
 
-    int noteIndex = 0;
-
     while (1)
     {
         volatile uint32_t delay = 0;
@@ -98,9 +99,14 @@ void SpeakerBasicFunction(void)
         {
 
         }
-        noteIndex = (noteIndex + 1) % NOTECNT;
-        MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
-        TIMER_A_CAPTURECOMPARE_REGISTER_0,
-                                    noteHalfPeriod[noteIndex]);
+        ChangeNote();
     }
+}
+
+void ChangeNote(void)
+{
+    noteIndex = (noteIndex + 1) % NOTECNT;
+    MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
+    TIMER_A_CAPTURECOMPARE_REGISTER_0,
+                                noteHalfPeriod[noteIndex]);
 }
