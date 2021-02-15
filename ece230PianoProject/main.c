@@ -25,6 +25,9 @@ int main(void)
     }
 }
 
+/*************************************************************************
+ *                          INTERRUPT HANDLERS
+ *************************************************************************/
 void PORT2_IRQHandler(void)
 {
     uint32_t status = MAP_GPIO_getEnabledInterruptStatus(GPIO_PORT_P2);
@@ -32,14 +35,21 @@ void PORT2_IRQHandler(void)
 
     if (status & GPIO_PIN7)
     {
+        //Button 0
         ChangeNote();
     }
     else if (status & GPIO_PIN6)
     {
+        //Button 1
         ChangeNote();
+    }
+    else if (status & GPIO_PIN5)
+    {
+        //Button 7
     }
     else if (status & GPIO_PIN3)
     {
+        //Button 5
         ChangeNote();
     }
 }
@@ -51,14 +61,17 @@ void PORT5_IRQHandler(void)
 
     if (status & GPIO_PIN7)
     {
+        //Button 8
         ChangeNote();
     }
     else if (status & GPIO_PIN6)
     {
+        //Button 3
         ChangeNote();
     }
     else if (status & GPIO_PIN1)
     {
+        //Button 6
         ChangeNote();
     }
 }
