@@ -34,4 +34,31 @@ void PORT2_IRQHandler(void)
     {
         ChangeNote();
     }
+    else if (status & GPIO_PIN6)
+    {
+        ChangeNote();
+    }
+    else if (status & GPIO_PIN3)
+    {
+        ChangeNote();
+    }
+}
+
+void PORT5_IRQHandler(void)
+{
+    uint32_t status = MAP_GPIO_getEnabledInterruptStatus(GPIO_PORT_P5);
+    MAP_GPIO_clearInterruptFlag(GPIO_PORT_P5, status);
+
+    if (status & GPIO_PIN7)
+    {
+        ChangeNote();
+    }
+    else if (status & GPIO_PIN6)
+    {
+        ChangeNote();
+    }
+    else if (status & GPIO_PIN1)
+    {
+        ChangeNote();
+    }
 }
