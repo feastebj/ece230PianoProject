@@ -21,6 +21,19 @@ uint16_t portFiveButtonsArray[] = { GPIO_PIN0, GPIO_PIN1, GPIO_PIN2,
 GPIO_PIN4,
                                     GPIO_PIN5, GPIO_PIN6, GPIO_PIN7 };
 
+//Button 0  -> C    -> 2.7  -> 40
+//Button 1  -> C#   -> 2.6  -> 39
+//Button 2  -> D    -> 5.6  -> 37
+//Button 3  -> D#   -> 2.3  -> 34
+//Button 4  -> E    -> 5.1  -> 33
+//Button 5  -> F    -> 2.5  -> 19
+//Button 6  -> F#   -> 5.7  -> 17
+//Button 7  -> G    -> 5.0  -> 13
+//Button 8  -> G#   -> 5.2  -> 12
+//Button 9  -> A    -> 5.5  -> 30
+//Button 10 -> A#
+//Button 11 -> B
+
 void ButtonsConfig(void)
 {
 //    // Port 2 Button Configuration

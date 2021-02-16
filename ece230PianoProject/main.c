@@ -29,19 +29,6 @@ int main(void)
  *                          INTERRUPT HANDLERS
  *************************************************************************/
 
-//Button 0  -> C    -> 2.7
-//Button 1  -> C#   -> 2.6
-//Button 2  -> D    -> 5.6
-//Button 3  -> D#   -> 2.3
-//Button 4  -> E    -> 5.1
-//Button 5  -> F    -> 2.5
-//Button 6  -> F#   -> 5.7
-//Button 7  -> G    -> 5.0
-//Button 8  -> G#   -> 5.2
-//Button 9  -> A    -> 5.5
-//Button 10 -> A#
-//Button 11 -> B
-
 void PORT2_IRQHandler(void)
 {
     uint32_t status = MAP_GPIO_getEnabledInterruptStatus(GPIO_PORT_P2);
@@ -61,13 +48,15 @@ void PORT2_IRQHandler(void)
     }
     else if (status & GPIO_PIN5)
     {
-        //Button 7
-        //ChangeNote();
+        //Button 5
+        //Plays F
+        ChangeNote(NOTEF3);
     }
     else if (status & GPIO_PIN3)
     {
-        //Button 5
-        //ChangeNote();
+        //Button 3
+        //Plays D#
+        ChangeNote(NOTED3_);
     }
 }
 
@@ -78,8 +67,9 @@ void PORT5_IRQHandler(void)
 
     if (status & GPIO_PIN7)
     {
-        //Button 8
-        //ChangeNote();
+        //Button 6
+        //Plays G#
+        ChangeNote(NOTEF3_);
     }
     else if (status & GPIO_PIN6)
     {
@@ -87,10 +77,23 @@ void PORT5_IRQHandler(void)
         //Plays D
         ChangeNote(NOTED3);
     }
+    else if (status & GPIO_PIN2)
+    {
+        //Button 8
+        //Plays A
+        ChangeNote(NOTEG3_);
+    }
     else if (status & GPIO_PIN1)
     {
-        //Button 6
-        //ChangeNote();
+        //Button 4
+        //Plays E
+        ChangeNote(NOTEE3);
+    }
+    else if (status & GPIO_PIN0)
+    {
+        //Button 7
+        //Plays G
+        ChangeNote(NOTEG3);
     }
 }
 
