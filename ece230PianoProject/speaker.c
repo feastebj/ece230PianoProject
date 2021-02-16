@@ -38,7 +38,7 @@ void SpeakerConfig(void)
     const Timer_A_UpModeConfig upConfig = {
     TIMER_A_CLOCKSOURCE_SMCLK,              // SMCLK Clock SOurce
             TIMER_A_CLOCKSOURCE_DIVIDER_3,          // SMCLK/1 = 3MHz
-            NOTEC3,                                    // 127 tick period
+            NOTEA4,                                    // 127 tick period
             TIMER_A_TAIE_INTERRUPT_DISABLE,         // Disable Timer interrupt
             TIMER_A_CCIE_CCR0_INTERRUPT_DISABLE,    // Disable CCR0 interrupt
             TIMER_A_DO_CLEAR                        // Clear value
@@ -50,7 +50,7 @@ void SpeakerConfig(void)
     TIMER_A_CAPTURECOMPARE_REGISTER_0,          // Use CCR1
             TIMER_A_CAPTURECOMPARE_INTERRUPT_DISABLE,   // Disable CCR interrupt
             TIMER_A_OUTPUTMODE_TOGGLE,              // Toggle output but
-            NOTEC3                                          // 32 Duty Cycle
+            NOTEA4                                          // 32 Duty Cycle
             };
 
     //![Simple PMAP Example]

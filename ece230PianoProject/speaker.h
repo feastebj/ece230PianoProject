@@ -40,9 +40,12 @@ extern void SpeakerBasicFunction(void);
 #define FrequencyG3_     207.65 //Hz
 #define FrequencyA3      220.00 //Hz
 #define FrequencyA3_     233.08 //Hz
-#define FrequencB3       246.94 //Hz
+#define FrequencyB3      246.94 //Hz
 
-#define NOTECNT 3
+// A 440 is used as the tuning note
+#define FrequencyA4      440.0  //Hz
+
+#define NOTECNT 12
 
 #define NOTEC3   TimerAClock/FrequencyC3/2
 #define NOTEC3_  TimerAClock/FrequencyC3_/2
@@ -55,7 +58,9 @@ extern void SpeakerBasicFunction(void);
 #define NOTEG3_  TimerAClock/FrequencyG3_/2
 #define NOTEA3   TimerAClock/FrequencyA3/2
 #define NOTEA3_  TimerAClock/FrequencyA3_/2
-#define NOTEB3   TimerAClock/FrequencB3/2
+#define NOTEB3   TimerAClock/FrequencyB3/2
+
+#define NOTEA4   TimerAClock/FrequencyA4/2
 
 #ifdef __cplusplus
 }
