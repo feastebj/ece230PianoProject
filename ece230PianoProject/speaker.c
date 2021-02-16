@@ -14,7 +14,7 @@
 
 #include "speaker.h"
 
-const uint16_t noteHalfPeriod[12] = { NOTEC3, NOTEC3_, NOTED3, NOTED3_, NOTEE3,
+const uint16_t noteHalfPeriod[NOTECNT] = { NOTEC3, NOTEC3_, NOTED3, NOTED3_, NOTEE3,
 NOTEF3,
                                       NOTEF3_, NOTEG3, NOTEG3_, NOTEA3, NOTEA3_,
                                       NOTEB3 };
@@ -103,14 +103,19 @@ void SpeakerBasicFunction(void)
         {
 
         }
-        ChangeNote();
+        //ChangeNote();
     }
 }
 
-void ChangeNote(void)
+void ChangeNote(double note)
 {
-    noteIndex = (noteIndex + 1) % NOTECNT;
+      //Basic note cycling, NOTE: DO NOT DELETE
+//    noteIndex = (noteIndex + 1) % NOTECNT;
+//    MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
+//    TIMER_A_CAPTURECOMPARE_REGISTER_0,
+//                                noteHalfPeriod[noteIndex]);
+
     MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
-    TIMER_A_CAPTURECOMPARE_REGISTER_0,
-                                noteHalfPeriod[noteIndex]);
+        TIMER_A_CAPTURECOMPARE_REGISTER_0,
+                                    note);
 }

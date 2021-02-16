@@ -37,12 +37,12 @@ void PORT2_IRQHandler(void)
     if (status & GPIO_PIN7)
     {
         //Button 0
-        ChangeNote();
+        ChangeNote(NOTEC3);
     }
     else if (status & GPIO_PIN6)
     {
         //Button 1
-        ChangeNote();
+        ChangeNote(NOTEC3_);
     }
     else if (status & GPIO_PIN5)
     {
@@ -51,7 +51,7 @@ void PORT2_IRQHandler(void)
     else if (status & GPIO_PIN3)
     {
         //Button 5
-        ChangeNote();
+        //ChangeNote();
     }
 }
 
@@ -63,17 +63,17 @@ void PORT5_IRQHandler(void)
     if (status & GPIO_PIN7)
     {
         //Button 8
-        ChangeNote();
+        //ChangeNote();
     }
     else if (status & GPIO_PIN6)
     {
         //Button 3
-        ChangeNote();
+        ChangeNote(NOTED3);
     }
     else if (status & GPIO_PIN1)
     {
         //Button 6
-        ChangeNote();
+        //ChangeNote();
     }
 }
 
