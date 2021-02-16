@@ -14,7 +14,10 @@
 
 #include "speaker.h"
 
-const uint16_t noteHalfPeriod[3] = { NOTEA4, NOTEB4, NOTEC5 };
+const uint16_t noteHalfPeriod[12] = { NOTEC3, NOTEC3_, NOTED3, NOTED3_, NOTEE3,
+NOTEF3,
+                                      NOTEF3_, NOTEG3, NOTEG3_, NOTEA3, NOTEA3_,
+                                      NOTEB3 };
 static int noteIndex = 0;
 
 void SpeakerConfig(void)
@@ -24,7 +27,8 @@ void SpeakerConfig(void)
     const uint8_t port_mapping[] = {
 //Port P2:
             PMAP_NONE,
-            PMAP_NONE, PMAP_NONE, PMAP_NONE, PMAP_TA0CCR0A,
+            PMAP_NONE,
+            PMAP_NONE, PMAP_NONE, PMAP_TA0CCR0A,
             PMAP_NONE,
             PMAP_NONE,
             PMAP_NONE };
@@ -34,7 +38,7 @@ void SpeakerConfig(void)
     const Timer_A_UpModeConfig upConfig = {
     TIMER_A_CLOCKSOURCE_SMCLK,              // SMCLK Clock SOurce
             TIMER_A_CLOCKSOURCE_DIVIDER_3,          // SMCLK/1 = 3MHz
-            NOTEA4,                                    // 127 tick period
+            NOTEC3,                                    // 127 tick period
             TIMER_A_TAIE_INTERRUPT_DISABLE,         // Disable Timer interrupt
             TIMER_A_CCIE_CCR0_INTERRUPT_DISABLE,    // Disable CCR0 interrupt
             TIMER_A_DO_CLEAR                        // Clear value
@@ -46,7 +50,7 @@ void SpeakerConfig(void)
     TIMER_A_CAPTURECOMPARE_REGISTER_0,          // Use CCR1
             TIMER_A_CAPTURECOMPARE_INTERRUPT_DISABLE,   // Disable CCR interrupt
             TIMER_A_OUTPUTMODE_TOGGLE,              // Toggle output but
-            NOTEA4                                          // 32 Duty Cycle
+            NOTEC3                                          // 32 Duty Cycle
             };
 
     //![Simple PMAP Example]

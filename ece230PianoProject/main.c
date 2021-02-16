@@ -4,7 +4,7 @@
 /* Standard Includes */
 #include <stdint.h>
 #include <stdbool.h>
-
+#include <stdio.h>
 #include "speaker.h"
 #include "buttons.h"
 
@@ -28,6 +28,7 @@ int main(void)
 /*************************************************************************
  *                          INTERRUPT HANDLERS
  *************************************************************************/
+
 void PORT2_IRQHandler(void)
 {
     uint32_t status = MAP_GPIO_getEnabledInterruptStatus(GPIO_PORT_P2);
@@ -75,3 +76,17 @@ void PORT5_IRQHandler(void)
         ChangeNote();
     }
 }
+
+//void interruptHandler(port, gpioArray) {
+//
+//       uint32_t status = MAP_GPIO_getEnabledInterruptStatus(port);
+//       MAP_GPIO_clearInterruptFlag(port, status);
+//
+//       for (i = 0; i <= sizeof(sizeof(gpioArray)); i++)
+//       //    {
+//       if (status & gpioArray[i])
+//       {
+//           ChangeNote();
+//       }
+//}
+

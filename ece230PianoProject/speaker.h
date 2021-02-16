@@ -9,8 +9,7 @@
 #define SPEAKER_H_
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 /*******************************************************************************
@@ -25,11 +24,38 @@ extern void SpeakerBasicFunction(void);
  *                                CONSTANTS
  ******************************************************************************/
 
+#define SystemClock 12000000 //Hz
+#define Prescaler 3 //Timer A prescaler
+#define TimerAClock  SystemClock/Prescaler
+#define TIMER_PERIOD    1000000 // (3*10^6) / (3)
+
+#define FrequencyC3      130.81 //Hz
+#define FrequencyC3_     138.59 //Hz
+#define FrequencyD3      146.83 //Hz
+#define FrequencyD3_     155.56 //Hz
+#define FrequencyE3      164.81 //Hz
+#define FrequencyF3      174.61 //Hz
+#define FrequencyF3_     185.00 //Hz
+#define FrequencyG3      196.00 //Hz
+#define FrequencyG3_     207.65 //Hz
+#define FrequencyA3      220.00 //Hz
+#define FrequencyA3_     233.08 //Hz
+#define FrequencB3       246.94 //Hz
+
 #define NOTECNT 3
-// Note A4 - 440 Hz, B4 - 493.88 Hz, C5 - 523.26 Hz
-#define NOTEA4  4545
-#define NOTEB4  4050
-#define NOTEC5  3822
+
+#define NOTEC3   TimerAClock/FrequencyC3/2
+#define NOTEC3_  TimerAClock/FrequencyC3_/2
+#define NOTED3   TimerAClock/FrequencyD3/2
+#define NOTED3_  TimerAClock/FrequencyD3_/2
+#define NOTEE3   TimerAClock/FrequencyE3/2
+#define NOTEF3   TimerAClock/FrequencyF3/2
+#define NOTEF3_  TimerAClock/FrequencyF3_/2
+#define NOTEG3   TimerAClock/FrequencyG3/2
+#define NOTEG3_  TimerAClock/FrequencyG3_/2
+#define NOTEA3   TimerAClock/FrequencyA3/2
+#define NOTEA3_  TimerAClock/FrequencyA3_/2
+#define NOTEB3   TimerAClock/FrequencB3/2
 
 #ifdef __cplusplus
 }
