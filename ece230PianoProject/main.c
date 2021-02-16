@@ -77,10 +77,15 @@ void PORT5_IRQHandler(void)
         //Plays D
         ChangeNote(NOTED3);
     }
+    else if (status & GPIO_PIN5){
+        //Button 9
+        //Plays A
+        ChangeNote(NOTEA3);
+    }
     else if (status & GPIO_PIN2)
     {
         //Button 8
-        //Plays A
+        //Plays G#
         ChangeNote(NOTEG3_);
     }
     else if (status & GPIO_PIN1)
