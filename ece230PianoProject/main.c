@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "speaker.h"
 #include "buttons.h"
+#include "sevenSegment.h"
 
 int main(void)
 {

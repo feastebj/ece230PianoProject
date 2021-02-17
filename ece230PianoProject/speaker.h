@@ -43,8 +43,6 @@ extern void SpeakerBasicFunction(void);
 #define FrequencyB3      246.94 //Hz
 
 #define REST        1.0
-#define HIGH_EDGE   true
-#define LOW_EDGE    false
 
 // A 440 is used as the tuning note
 #define FrequencyA4      440.0  //Hz
