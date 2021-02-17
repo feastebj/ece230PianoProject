@@ -24,7 +24,7 @@ NOTEE3,
 bool edges[10] = { true, true, true, true, true, true, true, true,
                    true, true };
 
-static int noteIndex = 0;
+//static int noteIndex = 0;
 
 void SpeakerConfig(void)
 {
@@ -48,7 +48,6 @@ void SpeakerConfig(void)
             TIMER_A_TAIE_INTERRUPT_DISABLE,         // Disable Timer interrupt
             TIMER_A_CCIE_CCR0_INTERRUPT_DISABLE,    // Disable CCR0 interrupt
             TIMER_A_DO_CLEAR                        // Clear value
-
             };
 
     /* Timer_A Compare Configuration Parameter  (PWM1) */
@@ -101,7 +100,6 @@ void SpeakerConfig(void)
 
 void SpeakerBasicFunction(void)
 {
-
     while (1)
     {
         volatile uint32_t delay = 0;
