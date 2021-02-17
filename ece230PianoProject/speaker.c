@@ -21,8 +21,8 @@ NOTEE3,
                                            NOTEG3, NOTEG3_, NOTEA3,
                                            NOTEA3_,
                                            NOTEB3 };
-bool edges[10] = { false, false, false, false, false, false, false, false,
-                   false, false };
+bool edges[10] = { true, true, true, true, true, true, true, true,
+                   true, true };
 
 static int noteIndex = 0;
 
@@ -56,7 +56,7 @@ void SpeakerConfig(void)
     TIMER_A_CAPTURECOMPARE_REGISTER_0,          // Use CCR1
             TIMER_A_CAPTURECOMPARE_INTERRUPT_DISABLE,   // Disable CCR interrupt
             TIMER_A_OUTPUTMODE_TOGGLE,              // Toggle output but
-            NOTEA4                                          // 32 Duty Cycle
+            REST                                          // 32 Duty Cycle
             };
 
     //![Simple PMAP Example]
