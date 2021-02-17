@@ -22,7 +22,10 @@ int main(void)
 
     while (1)
     {
-        MAP_PCM_gotoLPM0();
+        WriteToDisplay(0);
+        WriteToDisplay(1);
+        WriteToDisplay(2);
+//        MAP_PCM_gotoLPM0();
     }
 }
 

@@ -16,7 +16,7 @@ extern "C" {
  *                                FUNCTIONS
  ******************************************************************************/
 
-extern void SevenSegDisplay(int num);
+extern void WriteToDisplay(int num);
 extern void CycleDisplayDigits(void);
 extern void DisplayDigit(int num);
 
