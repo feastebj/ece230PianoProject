@@ -17,7 +17,7 @@ extern "C" {
  ******************************************************************************/
 
 extern void SpeakerConfig(void);
-extern void ChangeNote(double note);
+extern void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note);
 extern void SpeakerBasicFunction(void);
 
 /*******************************************************************************
@@ -41,6 +41,10 @@ extern void SpeakerBasicFunction(void);
 #define FrequencyA3      220.00 //Hz
 #define FrequencyA3_     233.08 //Hz
 #define FrequencyB3      246.94 //Hz
+
+#define REST        1.0
+#define HIGH_EDGE   true
+#define LOW_EDGE    false
 
 // A 440 is used as the tuning note
 #define FrequencyA4      440.0  //Hz

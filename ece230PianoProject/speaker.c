@@ -14,10 +14,16 @@
 
 #include "speaker.h"
 
-const uint16_t noteHalfPeriod[NOTECNT] = { NOTEC3, NOTEC3_, NOTED3, NOTED3_, NOTEE3,
-NOTEF3,
-                                      NOTEF3_, NOTEG3, NOTEG3_, NOTEA3, NOTEA3_,
-                                      NOTEB3 };
+const uint16_t noteHalfPeriod[NOTECNT] = { NOTEC3, NOTEC3_, NOTED3, NOTED3_,
+NOTEE3,
+                                           NOTEF3,
+                                           NOTEF3_,
+                                           NOTEG3, NOTEG3_, NOTEA3,
+                                           NOTEA3_,
+                                           NOTEB3 };
+bool edges[10] = { false, false, false, false, false, false, false, false,
+                   false, false };
+
 static int noteIndex = 0;
 
 void SpeakerConfig(void)
@@ -107,15 +113,30 @@ void SpeakerBasicFunction(void)
     }
 }
 
-void ChangeNote(double note)
+void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note)
 {
-      //Basic note cycling, NOTE: DO NOT DELETE
+    //Basic note cycling, NOTE: DO NOT DELETE
 //    noteIndex = (noteIndex + 1) % NOTECNT;
 //    MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
 //    TIMER_A_CAPTURECOMPARE_REGISTER_0,
 //                                noteHalfPeriod[noteIndex]);
 
-    MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
+    if (edges[buttonNum])
+    {
+        MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
         TIMER_A_CAPTURECOMPARE_REGISTER_0,
                                     note);
+        MAP_GPIO_interruptEdgeSelect(port, pin,
+        GPIO_LOW_TO_HIGH_TRANSITION);
+        edges[buttonNum] = false;
+    }
+    else
+    {
+        MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
+        TIMER_A_CAPTURECOMPARE_REGISTER_0,
+                                    REST);
+        MAP_GPIO_interruptEdgeSelect(port, pin,
+        GPIO_HIGH_TO_LOW_TRANSITION);
+        edges[buttonNum] = true;
+    }
 }
