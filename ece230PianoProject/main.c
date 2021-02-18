@@ -23,9 +23,22 @@ int main(void)
 
     while (1)
     {
-        WriteToDisplay(0);
-        WriteToDisplay(1);
-        WriteToDisplay(2);
+        int ii;
+        int jj;
+
+        for (ii = 0; ii < 100; ii++)
+        {
+            WriteToDisplay(0);
+            WriteToDisplay(1);
+            WriteToDisplay(2);
+        }
+
+        for (jj = 0; jj < 100; jj++)
+        {
+            WriteToDisplay(0);
+            WriteToDisplay(0);
+            WriteToDisplay(0);
+        }
 //        MAP_PCM_gotoLPM0();
     }
 }
@@ -69,7 +82,6 @@ void PORT5_IRQHandler(void)
 {
     uint32_t status = MAP_GPIO_getEnabledInterruptStatus(GPIO_PORT_P5);
     MAP_GPIO_clearInterruptFlag(GPIO_PORT_P5, status);
-
 
     if (status & GPIO_PIN7)
     {

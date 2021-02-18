@@ -90,7 +90,7 @@ void WriteToDisplay(int num)
 void CycleDisplayDigits(void)
 {
     volatile uint32_t delay = 0;
-    for (delay = 1000; delay > 0; delay--)
+    for (delay = 5000; delay > 0; delay--)
     {
 
     }
