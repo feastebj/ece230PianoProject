@@ -16,6 +16,7 @@ int main(void)
 
     SpeakerConfig();
     ButtonsConfig();
+    SevenSegmentConfig();
 
     MAP_Interrupt_enableSleepOnIsrExit();
     MAP_Interrupt_enableMaster();

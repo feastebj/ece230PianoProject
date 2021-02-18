@@ -16,6 +16,24 @@
 
 int digitIndex = 0;
 
+void SevenSegmentConfig(void)
+{
+    const uint16_t sevenSegPinArray[7] = { GPIO_PIN6, GPIO_PIN4, GPIO_PIN2,
+    GPIO_PIN1,
+                                           GPIO_PIN0,
+                                           GPIO_PIN5,
+                                           GPIO_PIN3 };
+
+    int p;
+    for(p = 0; p < 7; p++){
+        GPIO_setAsOutputPin(GPIO_PORT_P4, sevenSegPinArray[p]);
+    }
+
+    GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN7);
+    GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN6);
+    GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN5);
+}
+
 void WriteToDisplay(int num)
 {
     const uint16_t sevenSegPinArray[7] = { GPIO_PIN6, GPIO_PIN4, GPIO_PIN2,
@@ -40,17 +58,16 @@ void WriteToDisplay(int num)
 //                                       sevenSeg6, sevenSeg7, sevenSeg8,
 //                                       sevenSeg9 };
 
-    const int sevenSegArray[10][7] = { { 1, 1, 1, 1, 1, 1, 0 },
-                                       { 0, 1, 1, 0, 0, 0, 0 },
-    { 1, 1, 0, 1, 1, 0, 1 },
-    { 1, 1, 1, 1, 0, 0, 1 },
-    { 0, 1, 1, 0, 0, 1, 1 },
-    { 1, 0, 1, 1, 0, 1, 1 },
-    { 1, 0, 1, 1, 1, 1, 1 },
-    { 1, 1, 1, 0, 0, 0, 0 },
-    { 1, 1, 1, 1, 1, 1, 1 },
-    { 1, 1, 1, 1, 0, 1, 1 }
-
+    const int sevenSegArray[10][7] = { { 1, 1, 1, 1, 1, 1, 0 }, { 0, 1, 1, 0, 0,
+                                                                  0, 0 },
+                                       { 1, 1, 0, 1, 1, 0, 1 }, { 1, 1, 1, 1, 0,
+                                                                  0, 1 },
+                                       { 0, 1, 1, 0, 0, 1, 1 }, { 1, 0, 1, 1, 0,
+                                                                  1, 1 },
+                                       { 1, 0, 1, 1, 1, 1, 1 }, { 1, 1, 1, 0, 0,
+                                                                  0, 0 },
+                                       { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 0,
+                                                                  1, 1 }
 
     };
 
