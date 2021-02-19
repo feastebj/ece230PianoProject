@@ -18,6 +18,8 @@ extern "C" {
 
 extern void SpeakerConfig(void);
 extern void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note);
+extern int GetNote(void);
+extern void SetNote(double newNote);
 extern void SpeakerBasicFunction(void);
 
 /*******************************************************************************
@@ -63,6 +65,7 @@ extern void SpeakerBasicFunction(void);
 #define NOTEB3   TimerAClock/FrequencyB3/2
 
 #define NOTEA4   TimerAClock/FrequencyA4/2
+
 
 #ifdef __cplusplus
 }

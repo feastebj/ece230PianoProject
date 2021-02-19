@@ -14,6 +14,8 @@
 
 #include "speaker.h"
 
+int CurrentNote = 0;
+
 const uint16_t noteHalfPeriod[NOTECNT] = { NOTEC3, NOTEC3_, NOTED3, NOTED3_,
 NOTEE3,
                                            NOTEF3,
@@ -21,8 +23,7 @@ NOTEE3,
                                            NOTEG3, NOTEG3_, NOTEA3,
                                            NOTEA3_,
                                            NOTEB3 };
-bool edges[10] = { true, true, true, true, true, true, true, true,
-                   true, true };
+bool edges[10] = { true, true, true, true, true, true, true, true, true, true };
 
 //static int noteIndex = 0;
 
@@ -127,6 +128,8 @@ void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note)
         MAP_GPIO_interruptEdgeSelect(port, pin,
         GPIO_LOW_TO_HIGH_TRANSITION);
         edges[buttonNum] = false;
+
+        SetNote(note);
     }
     else
     {
@@ -136,5 +139,18 @@ void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note)
         MAP_GPIO_interruptEdgeSelect(port, pin,
         GPIO_HIGH_TO_LOW_TRANSITION);
         edges[buttonNum] = true;
+
+        //SetNote(REST);
     }
+}
+
+int GetNote(void)
+{
+    return CurrentNote;
+}
+
+void SetNote(double newNote){
+//    note = TimerAClock/FrequencyC3/2
+    int freq = (int)(TimerAClock/newNote/2);
+    CurrentNote = freq;
 }
