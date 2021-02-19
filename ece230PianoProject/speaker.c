@@ -140,7 +140,7 @@ void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note)
         GPIO_HIGH_TO_LOW_TRANSITION);
         edges[buttonNum] = true;
 
-        //SetNote(REST);
+        SetNote(REST);
     }
 }
 

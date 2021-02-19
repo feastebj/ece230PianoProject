@@ -28,14 +28,14 @@ int main(void)
 
         //for (ii = 0; ii < 100; ii++)
         //{
-            WriteToDisplay(GetNote());
+//            WriteToDisplay(GetNote());
         //}
 
 //        for (jj = 0; jj < 100; jj++)
 //        {
 //            WriteToDisplay(842);
 //        }
-//        MAP_PCM_gotoLPM0();
+        MAP_PCM_gotoLPM0();
     }
 }
 
@@ -117,6 +117,12 @@ void PORT5_IRQHandler(void)
     }
 }
 
+void TA1_0_IRQHandler(void)
+{
+    WriteToDisplay(GetNote());
+    MAP_Timer_A_clearCaptureCompareInterrupt(TIMER_A1_BASE,
+    TIMER_A_CAPTURECOMPARE_REGISTER_0);
+}
 //void interruptHandler(port, gpioArray) {
 //
 //       uint32_t status = MAP_GPIO_getEnabledInterruptStatus(port);

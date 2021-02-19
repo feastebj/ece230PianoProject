@@ -26,6 +26,8 @@ extern void SevenSegmentConfig(void);
  *                                CONSTANTS
  ******************************************************************************/
 
+#define TIMER_PERIOD_7SEG    5000
+
 const uint16_t sevenSegPinArray[];
 const int sevenSegDisplayArray[];
 

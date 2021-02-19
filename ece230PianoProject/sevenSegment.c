@@ -19,6 +19,16 @@ int digitIndex = 0;
 
 void SevenSegmentConfig(void)
 {
+    /* Timer_A UpMode Configuration Parameter */
+    const Timer_A_UpDownModeConfig upDownConfig = {
+    TIMER_A_CLOCKSOURCE_SMCLK,              // SMCLK Clock Source
+            TIMER_A_CLOCKSOURCE_DIVIDER_3,          // SMCLK/1 = 3MHz
+            TIMER_PERIOD_7SEG,                           // 5000 tick period
+            TIMER_A_TAIE_INTERRUPT_ENABLE,         // Disable Timer interrupt
+            TIMER_A_CCIE_CCR0_INTERRUPT_ENABLE,    // Enable CCR0 interrupt
+            TIMER_A_DO_CLEAR                        // Clear value
+            };
+
     const uint16_t sevenSegPinArray[7] = { GPIO_PIN6, GPIO_PIN4, GPIO_PIN2,
     GPIO_PIN1,
                                            GPIO_PIN0,
@@ -34,6 +44,15 @@ void SevenSegmentConfig(void)
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN7);
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN6);
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN5);
+
+    /* Configuring Timer_A1 for Up Mode */
+    MAP_Timer_A_configureUpDownMode(TIMER_A1_BASE, &upDownConfig);
+
+    /* Enabling interrupts and starting the timer */
+    MAP_Interrupt_enableSleepOnIsrExit();
+    MAP_Interrupt_enableInterrupt(INT_TA1_0);
+    //MAP_Interrupt_enableInterrupt(INT_TA1_N);                   //N
+    MAP_Timer_A_startCounter(TIMER_A1_BASE, TIMER_A_UPDOWN_MODE);
 }
 
 void WriteToDigit(int num)
