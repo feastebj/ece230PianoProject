@@ -16,6 +16,8 @@
 
 int CurrentNote = 0;
 
+double CurrentOctave = 1.0;
+
 const uint16_t noteHalfPeriod[NOTECNT] = { NOTEC3, NOTEC3_, NOTED3, NOTED3_,
 NOTEE3,
                                            NOTEF3,
@@ -119,6 +121,7 @@ void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note)
 //    MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
 //    TIMER_A_CAPTURECOMPARE_REGISTER_0,
 //                                noteHalfPeriod[noteIndex]);
+    note *= GetOctave();
 
     if (edges[buttonNum])
     {
@@ -151,6 +154,16 @@ int GetNote(void)
 
 void SetNote(double newNote)
 {
-    int freq = (int) (TimerAClock / newNote / 2);
+    int freq = (int) (GetOctave()*TimerAClock / newNote / 2);
     CurrentNote = freq;
+}
+
+double GetOctave(void)
+{
+    return CurrentOctave;
+}
+
+void SetOctave(double newOctave)
+{
+    CurrentOctave = newOctave;
 }
