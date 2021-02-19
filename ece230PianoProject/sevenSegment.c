@@ -11,6 +11,7 @@
 /* Standard Includes */
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #include "sevenSegment.h"
 
@@ -25,7 +26,8 @@ void SevenSegmentConfig(void)
                                            GPIO_PIN3 };
 
     int p;
-    for(p = 0; p < 7; p++){
+    for (p = 0; p < 7; p++)
+    {
         GPIO_setAsOutputPin(GPIO_PORT_P4, sevenSegPinArray[p]);
     }
 
@@ -34,7 +36,7 @@ void SevenSegmentConfig(void)
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN5);
 }
 
-void WriteToDisplay(int num)
+void WriteToDigit(int num)
 {
     const uint16_t sevenSegPinArray[7] = { GPIO_PIN6, GPIO_PIN4, GPIO_PIN2,
     GPIO_PIN1,
@@ -71,6 +73,8 @@ void WriteToDisplay(int num)
 
     };
 
+    CycleDisplayDigits();
+
     int s;
     for (s = 0; s < 7; s++)
     {
@@ -83,8 +87,6 @@ void WriteToDisplay(int num)
             GPIO_setOutputLowOnPin(GPIO_PORT_P4, sevenSegPinArray[s]);
         }
     }
-
-    CycleDisplayDigits();
 }
 
 void CycleDisplayDigits(void)
@@ -120,4 +122,18 @@ void DisplayDigit(int num)
         GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN6);
         GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN5);
     }
+}
+
+void WriteToDisplay(int num)
+{
+    int a = num % 10;
+    num /= 10;
+    int b = num % 10;
+    num /= 10;
+    int c = num % 10;
+
+    WriteToDigit(a);
+    WriteToDigit(b);
+    WriteToDigit(c);
+
 }

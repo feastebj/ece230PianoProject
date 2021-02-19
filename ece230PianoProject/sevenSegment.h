@@ -17,6 +17,7 @@ extern "C" {
  ******************************************************************************/
 
 extern void WriteToDisplay(int num);
+extern void WriteToDigit(int num);
 extern void CycleDisplayDigits(void);
 extern void DisplayDigit(int num);
 extern void SevenSegmentConfig(void);

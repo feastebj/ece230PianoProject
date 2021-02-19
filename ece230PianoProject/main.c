@@ -28,16 +28,12 @@ int main(void)
 
         for (ii = 0; ii < 100; ii++)
         {
-            WriteToDisplay(0);
-            WriteToDisplay(1);
-            WriteToDisplay(2);
+            WriteToDisplay(210);
         }
 
         for (jj = 0; jj < 100; jj++)
         {
-            WriteToDisplay(0);
-            WriteToDisplay(0);
-            WriteToDisplay(0);
+            WriteToDisplay(842);
         }
 //        MAP_PCM_gotoLPM0();
     }
