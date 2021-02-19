@@ -23,18 +23,6 @@ int main(void)
 
     while (1)
     {
-        //int ii;
-//        int jj;
-
-        //for (ii = 0; ii < 100; ii++)
-        //{
-//            WriteToDisplay(GetNote());
-        //}
-
-//        for (jj = 0; jj < 100; jj++)
-//        {
-//            WriteToDisplay(842);
-//        }
         MAP_PCM_gotoLPM0();
     }
 }

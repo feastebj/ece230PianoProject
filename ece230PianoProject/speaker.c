@@ -149,8 +149,8 @@ int GetNote(void)
     return CurrentNote;
 }
 
-void SetNote(double newNote){
-//    note = TimerAClock/FrequencyC3/2
-    int freq = (int)(TimerAClock/newNote/2);
+void SetNote(double newNote)
+{
+    int freq = (int) (TimerAClock / newNote / 2);
     CurrentNote = freq;
 }
