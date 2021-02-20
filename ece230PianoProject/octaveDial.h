@@ -23,7 +23,6 @@ extern double GetVoltage(void);
  *                                CONSTANTS
  ******************************************************************************/
 
-
 #ifdef __cplusplus
 }
 #endif

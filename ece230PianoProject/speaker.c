@@ -167,11 +167,11 @@ void SetOctave(double voltage)
 {
     double newOctave;
 
-    if (voltage > 2.5)
+    if (voltage > HIGH_OCTAVE_THRESH)
     {
         newOctave = 2.0;
     }
-    else if (voltage < 1.0)
+    else if (voltage < LOW_OCTAVE_THRESH)
     {
         newOctave = 0.5;
     }

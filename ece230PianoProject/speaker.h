@@ -68,6 +68,9 @@ extern void SpeakerBasicFunction(void);
 
 #define NOTEA4   TimerAClock/FrequencyA4/2
 
+#define HIGH_OCTAVE_THRESH  2.3
+#define LOW_OCTAVE_THRESH   1.0
+
 
 #ifdef __cplusplus
 }
