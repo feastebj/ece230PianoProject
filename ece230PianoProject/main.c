@@ -1,3 +1,26 @@
+/*
+ * Author:  Ben Feaster, T.J. Rutan
+ * Design:  Capstone Project, ECE230-02
+ * Date:    2 February 2021
+ *
+ * Description: This program is written to run an electric piano
+ *              with supporting peripherals to display the frequency
+ *              and the letter of the note being played and a dial
+ *              to switch octave registers.
+ *
+ *              There are 12 push buttons to function the keys of
+ *              a keyboard. The frequency is displayed on a four
+ *              digit seven segment display. The letter of the note
+ *              is displayed on a neo-pixel array. The hardware also
+ *              supports a volume dial but does not require a driver
+ *              for it to function.
+ *
+ *              All the peripherals are run via interrupts (see
+ *              handlers at the bottom of this file) so the main
+ *              only includes the configuration modules and then
+ *              goes into low power mode from then on.
+ */
+
 /* DriverLib Includes */
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 
@@ -33,6 +56,12 @@ int main(void)
  *                          INTERRUPT HANDLERS
  *************************************************************************/
 
+/*
+ * This handler manages the buttons on
+ * Port 2.
+ *
+ * See Port2Handler() in buttons.c
+ */
 void PORT2_IRQHandler(void)
 {
     uint32_t status = MAP_GPIO_getEnabledInterruptStatus(GPIO_PORT_P2);
@@ -40,6 +69,12 @@ void PORT2_IRQHandler(void)
     Port2Handler(status);
 }
 
+/*
+ * This handler manages the buttons on
+ * Port 5.
+ *
+ * See Port5Handler() in buttons.c
+ */
 void PORT5_IRQHandler(void)
 {
     uint32_t status = MAP_GPIO_getEnabledInterruptStatus(GPIO_PORT_P5);
@@ -47,6 +82,13 @@ void PORT5_IRQHandler(void)
     Port5Handler(status);
 }
 
+/*
+ * This handler updates the seven segment
+ * display.
+ *
+ * See WriteToDisplay() in sevenSegment.c
+ * and GetNote() in speaker.c
+ */
 void TA1_0_IRQHandler(void)
 {
     WriteToDisplay(GetNote());

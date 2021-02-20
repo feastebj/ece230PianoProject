@@ -67,6 +67,17 @@ void ButtonsConfig(void)
 
 }
 
+/*
+ * This function takes in a GPIO pin number
+ * and calls ChangeNote() and passes the
+ * appropriate note value on the correct pin.
+ *
+ * There are comments indicating the
+ * corresponding note and button numbers
+ * for each pin.
+ *
+ * This is called by the PORT5_IRQHandler()
+ */
 void Port5Handler(uint32_t pin)
 {
     if (pin & GPIO_PIN7)
@@ -107,6 +118,17 @@ void Port5Handler(uint32_t pin)
     }
 }
 
+/*
+ * This function takes in a GPIO pin number
+ * and calls ChangeNote() and passes the
+ * appropriate note value on the correct pin.
+ *
+ * There are comments indicating the
+ * corresponding note and button numbers
+ * for each pin.
+ *
+ * This is called by the PORT2_IRQHandler()
+ */
 void Port2Handler(uint32_t pin)
 {
     if (pin & GPIO_PIN7)

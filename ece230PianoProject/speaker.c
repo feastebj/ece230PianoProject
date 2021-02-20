@@ -101,30 +101,31 @@ void SpeakerConfig(void)
     MAP_Timer_A_initCompare(TIMER_A0_BASE, &compareConfig_PWM1);
 }
 
-void SpeakerBasicFunction(void)
-{
-    while (1)
-    {
-        volatile uint32_t delay = 0;
-        for (delay = 1000000; delay > 0; delay--)
-        {
-
-        }
-        //ChangeNote();
-    }
-}
-
+/*
+ * This function changes the note (or rest) played by the speaker.
+ *
+ * Within the function, the edge select of the passed button number
+ * will be checked. If the edge select is true (high-to-low), the
+ * current note value will be played. If not, a rest will be loaded
+ * to the speaker's capture-compare register and stay silent.
+ *
+ * In either case, the edge select is toggled each time a button is pushed.
+ * This allows the interrupt to occur after each button press and release,
+ * so a note is only played while a key is held down.
+ *
+ * This is called by the Port2Handler() and
+ * Port5Handler() functions.
+ */
 void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note)
 {
-    //Basic note cycling, NOTE: DO NOT DELETE
-//    noteIndex = (noteIndex + 1) % NOTECNT;
-//    MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
-//    TIMER_A_CAPTURECOMPARE_REGISTER_0,
-//                                noteHalfPeriod[noteIndex]);
+    //This operation will double, halve, or maintain the
+    //note frequency to give the note in the current
+    //octave register.
     note /= GetOctave();
 
     if (edges[buttonNum])
     {
+        //If the button is pushed, load the note value.
         MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
         TIMER_A_CAPTURECOMPARE_REGISTER_0,
                                     note);
@@ -136,6 +137,7 @@ void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note)
     }
     else
     {
+        //If the button is released, load the rest value.
         MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
         TIMER_A_CAPTURECOMPARE_REGISTER_0,
                                     REST);
@@ -163,6 +165,12 @@ double GetOctave(void)
     return CurrentOctave;
 }
 
+/*
+ * This function sets the octave divider on the current
+ * note frequency which regulates the octave in which a
+ * note is.
+ *
+ */
 void SetOctave(double voltage)
 {
     double newOctave;
