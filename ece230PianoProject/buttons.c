@@ -15,14 +15,15 @@
 #include "buttons.h"
 
 #define PORT2_PIN_NUM 4
-#define PORT5_PIN_NUM 7
+#define PORT5_PIN_NUM 6
 
 uint16_t portTwoButtonsArray[PORT2_PIN_NUM] = { GPIO_PIN3, GPIO_PIN5, GPIO_PIN6,
 GPIO_PIN7 };
 
-uint16_t portFiveButtonsArray[PORT5_PIN_NUM] = { GPIO_PIN0, GPIO_PIN1, GPIO_PIN2,
-GPIO_PIN4,
-                                    GPIO_PIN5, GPIO_PIN6, GPIO_PIN7 };
+uint16_t portFiveButtonsArray[PORT5_PIN_NUM] = { GPIO_PIN0, GPIO_PIN1,
+                                                 GPIO_PIN2,
+                                                 GPIO_PIN4,
+                                                 GPIO_PIN6, GPIO_PIN7 };
 
 //Button 0  -> C    -> 2.7  -> 40
 //Button 1  -> C#   -> 2.6  -> 39
@@ -33,7 +34,7 @@ GPIO_PIN4,
 //Button 6  -> F#   -> 5.7  -> 17
 //Button 7  -> G    -> 5.0  -> 13
 //Button 8  -> G#   -> 5.2  -> 12
-//Button 9  -> A    -> 5.5  -> 30
+//Button 9  -> A    -> 5.4  -> 29
 //Button 10 -> A#
 //Button 11 -> B
 

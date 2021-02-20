@@ -163,7 +163,22 @@ double GetOctave(void)
     return CurrentOctave;
 }
 
-void SetOctave(double newOctave)
+void SetOctave(double voltage)
 {
+    double newOctave;
+
+    if (voltage > 2.5)
+    {
+        newOctave = 2.0;
+    }
+    else if (voltage < 1.0)
+    {
+        newOctave = 0.5;
+    }
+    else
+    {
+        newOctave = 1.0;
+    }
+
     CurrentOctave = newOctave;
 }

@@ -8,6 +8,7 @@
 #include "speaker.h"
 #include "buttons.h"
 #include "sevenSegment.h"
+#include "octaveDial.h"
 
 int main(void)
 {
@@ -17,6 +18,7 @@ int main(void)
     SpeakerConfig();
     ButtonsConfig();
     SevenSegmentConfig();
+    OctaveDialConfig();
 
     MAP_Interrupt_enableSleepOnIsrExit();
     MAP_Interrupt_enableMaster();
@@ -79,11 +81,11 @@ void PORT5_IRQHandler(void)
         //Plays D
         ChangeNote(GPIO_PORT_P5, GPIO_PIN6, 2, NOTED3);
     }
-    else if (status & GPIO_PIN5)
+    else if (status & GPIO_PIN4)
     {
         //Button 9
         //Plays A
-        ChangeNote(GPIO_PORT_P5, GPIO_PIN5, 9, NOTEA3);
+        ChangeNote(GPIO_PORT_P5, GPIO_PIN4, 9, NOTEA3);
     }
     else if (status & GPIO_PIN2)
     {
@@ -110,6 +112,22 @@ void TA1_0_IRQHandler(void)
     WriteToDisplay(GetNote());
     MAP_Timer_A_clearCaptureCompareInterrupt(TIMER_A1_BASE,
     TIMER_A_CAPTURECOMPARE_REGISTER_0);
+}
+
+/* ADC Interrupt Handler. This handler is called whenever there is a conversion
+ * that is finished for ADC_MEM0.
+ */
+void ADC14_IRQHandler(void)
+{
+    uint64_t status = MAP_ADC14_getEnabledInterruptStatus();
+    MAP_ADC14_clearInterruptFlag(status);
+
+    if (ADC_INT0 & status)
+    {
+        SetOctave(GetVoltage());
+
+        MAP_ADC14_toggleConversionTrigger();
+    }
 }
 //void interruptHandler(port, gpioArray) {
 //

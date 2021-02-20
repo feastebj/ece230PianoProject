@@ -21,7 +21,7 @@ extern void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note);
 extern int GetNote(void);
 extern void SetNote(double newNote);
 extern double GetOctave(void);
-extern void SetOctave(double newOctave);
+extern void SetOctave(double voltage);
 extern void SpeakerBasicFunction(void);
 
 /*******************************************************************************
