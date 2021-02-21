@@ -36,56 +36,24 @@
 
 int main(void)
 {
-    //long unsigned int i;
-
     /* Halting WDT  */
     MAP_WDT_A_holdTimer();
 
     SpeakerConfig();
     ButtonsConfig();
     SevenSegmentConfig();
+    NeopixelSetup();
     OctaveDialConfig();
-    //NeopixelSetup();
 
     MAP_Interrupt_enableSleepOnIsrExit();
     MAP_Interrupt_enableMaster();
-
-
-//    MAP_GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN6); //pin 15 on boosterpad
-//    char LEDS_addressed[] = { 0, 1, 2, 3, 4, 6, 12, 18, 24, 25, 29, 31, 32, 33 };
 
     // Do this forever
     while (1)
     {
         MAP_PCM_gotoLPM0();
-//        // Iterate through each of the 50 led's
-//        int j;
-//        for (i = 0; i < NumberOfLEDs; i++)
-//        {
-//
-//            // Iterate through each of the buttons to be illuminated
-//            for (j = 0; j < sizeof(LEDS_addressed); j++)
-//            {
-//                // If the current led (i) is equal to the led we want illuminated (j), illuminate led i
-//                if (i == LEDS_addressed[j])
-//                {
-//                    LEDS[i][0] = 0;
-//                    LEDS[i][1] = 0;
-//                    LEDS[i][2] = 255; // all blue
-//                }
-//            }
-//        }
-//
-//        // Send LED data to each led
-//        for (i = 0; i < NumberOfLEDs; i++)
-//            NeoPixelDataTransfer(LEDS[i][0], LEDS[i][1], LEDS[i][2]);
-//
-//        // delay
-//        //for (i = 0; i < DelayTime; i++)
-//        //;
     }
 }
-
 /*************************************************************************
  *                          INTERRUPT HANDLERS
  *************************************************************************/
@@ -126,6 +94,8 @@ void PORT5_IRQHandler(void)
 void TA1_0_IRQHandler(void)
 {
     WriteToDisplay(GetNote());
+    WriteNeopixelsToDisplay();
+
     MAP_Timer_A_clearCaptureCompareInterrupt(TIMER_A1_BASE,
     TIMER_A_CAPTURECOMPARE_REGISTER_0);
 }
