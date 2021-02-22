@@ -86,12 +86,12 @@ void SpeakerConfig(void)
     MAP_FlashCtl_setWaitState(FLASH_BANK1, 2);
     MAP_CS_startHFXT(false);
 
-    /* Initializing MCLK to HFXT (effectively 48MHz) */
-    MAP_CS_initClockSignal(CS_MCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_4);
-
-    /* Initializing SMCLK to HFXT (effectively 48MHz) with prescaler of 4*/
-
-    MAP_CS_initClockSignal(CS_SMCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_4);
+//    /* Initializing MCLK to HFXT (effectively 48MHz) */
+//    MAP_CS_initClockSignal(CS_MCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_4);
+//
+//    /* Initializing SMCLK to HFXT (effectively 48MHz) with prescaler of 4*/
+//
+//    MAP_CS_initClockSignal(CS_SMCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_4);
 
     /* Configuring Timer_A1 for Up Mode and starting */
     MAP_Timer_A_configureUpMode(TIMER_A0_BASE, &upConfig);
@@ -181,15 +181,15 @@ void SetOctave(double voltage)
 
     if (voltage > HIGH_OCTAVE_THRESH)
     {
-        newOctave = 2.0;
+        newOctave = 4.0;
     }
     else if (voltage < LOW_OCTAVE_THRESH)
     {
-        newOctave = 0.5;
+        newOctave = 1.0;
     }
     else
     {
-        newOctave = 1.0;
+        newOctave = 2.0;
     }
 
     CurrentOctave = newOctave;

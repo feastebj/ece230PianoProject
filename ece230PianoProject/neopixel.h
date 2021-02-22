@@ -18,7 +18,7 @@ extern "C"
  ******************************************************************************/
 extern void NeopixelSetup(void);
 extern void NeoPixelDataTransfer(char Green, char Red, char Blue);
-extern void WriteNeopixelsToDisplay(void);
+extern void WriteNeopixelsToDisplay(int num);
 
 /*******************************************************************************
  *                                CONSTANTS
