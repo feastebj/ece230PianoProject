@@ -110,7 +110,9 @@ void NeoPixelDataTransfer(char Green, char Red, char Blue)
 
 void WriteNeopixelsToDisplay(int num)
 {
+
     long unsigned int i;
+    long unsigned int j;
 
 //    char neoPixelC[] =  {01,02,03,05,09,10,14,15,19,50,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00};
 //    char neoPixelC_[] = {01,02,03,05,09,10,14,15,19,26,28,30,31,32,33,34,36,38,40,41,42,43,44,46,48,50,00,00,00,00};
@@ -137,52 +139,54 @@ void WriteNeopixelsToDisplay(int num)
 //                                 {00,01,02,03,07,09,12,14,15,16,17,18,50,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00},
 //                                 {00,01,02,03,04,05,07,09,10,12,14,16,18,25,26,27,28,29,30,32,35,36,50,00,00,00,00,00,00,00},
 //                                 {00,01,02,03,04,05,07,09,10,12,14,16,18,50,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00}};
-    int neoPixelNote[24][30] = { {1}, { 1, 2, 3, 4, 5, 9, 10, 14, 15, 19},
-                                 {1}, { 1, 2, 3, 4, 5, 9, 10, 14, 15, 19, 26, 28, 30,
-                                   31, 32, 33, 34, 36, 38, 40, 41, 42, 43, 44,
-                                   46, 48},
-                                 {1}, { 0, 1, 2, 3, 4, 5, 9, 10, 14, 16, 17, 18},
-                                 {1}, { 0, 1, 2, 3, 4, 5, 9, 10, 14, 16, 17, 18, 26,
-                                   28, 30, 31, 32, 33, 34, 36, 38, 40, 41, 42,
-                                   43, 44, 46, 48},
-                                 {1}, { 0, 1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 15, 19
-                                   },
-                                 {1}, { 0, 1, 2, 3, 4, 7, 9, 12, 14, 19},
-                                 {1}, { 0, 1, 2, 3, 4, 7, 9, 12, 14, 19, 26, 28, 30,
-                                   31, 32, 33, 34, 36, 38, 40, 41, 42, 43, 44,
-                                   46, 48 },
-                                 {1}, { 0, 1, 2, 3, 4, 5, 9, 10, 12, 14, 15, 16, 17,
-                                   19},
-                                 {1}, { 0, 1, 2, 3, 4, 5, 9, 10, 12, 14, 15, 16, 17,
-                                   19, 26, 28, 30, 31, 32, 33, 34, 36, 38, 40,
-                                   41, 42, 43, 44, 46, 48 },
-                                 {1}, { 0, 1, 2, 3, 7, 9, 12, 14, 15, 16, 17, 18},
-                                 {1}, { 0, 1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 16, 18,
-                                   25, 26, 27, 28, 29, 30, 32, 35, 36},
-                                 {1}, { 0, 1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 16, 18} };
 
-    int j;
+    int *neoPixelNote[] =
+            { (int[] ) { 0, 1, 2, 3, 4, 5, 9, 10, 14, 15, 19 }, // Note C
+              (int[] ) { 0, 1, 2, 3, 4, 5, 9, 10, 14, 15, 19, 26, 28, 30,
+                                31, 32, 33, 34, 36, 38, 40, 41, 42, 43, 44, 46,
+                                48 }, // Note C #
+              (int[] ) { 0, 1, 2, 3, 4, 5, 9, 10, 14, 16, 17, 18 }, // Note D
+              (int[] ) { 0, 1, 2, 3, 4, 5, 9, 10, 14, 16, 17, 18, 26, 28,
+                                30, 31, 32, 33, 34, 36, 38, 40, 41, 42, 43, 44,
+                                46, 48 }, // Note D#
+              (int[] ) { 0, 1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 15, 19 }, // Note E
+              (int[] ) { 0, 1, 2, 3, 4, 7, 9, 12, 14, 19 }, // F
+              (int[] ) { 0, 1, 2, 3, 4, 7, 9, 12, 14, 19, 26, 28, 30, 31,
+                                32, 33, 34, 36, 38, 40, 41, 42, 43, 44, 46, 48 }, // Note F#
+              (int[] ) { 0, 1, 2, 3, 4, 5, 9, 10, 12, 14, 15, 16, 17, 19 }, // Note G
+              (int[] ) { 0, 1, 2, 3, 4, 5, 9, 10, 12, 14, 15, 16, 17, 19,
+                                26, 28, 30, 31, 32, 33, 34, 36, 38, 40, 41, 42,
+                                43, 44, 46, 48 }, // Note G#
+              (int[] ) { 0, 1, 2, 3, 7, 9, 12, 14, 15, 16, 17, 18 }, // Note A
+              (int[] ) { 0, 1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 16, 18, 25,
+                                26, 27, 28, 29, 30, 32, 35, 36 }, // Note B
+              (int[] ) { 0, 1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 16, 18 } };
+
+    //printf("The num value is %d\n", num);
+    //printf("The neoPixelNote[num] array size is %d\n",
+    //       sizeof(neoPixelNote[num]));
+
+    // Make second array to track number of led's to light up, long story short C doesn't support getting array sizes from pointers
+    int neoPixelSizes[] = { 11, 27, 12, 28, 13, 10, 26, 14, 30, 12, 22, 13 };
+
+    // Check all 50 LED's
     for (i = 0; i < NumberOfLEDs; i++)
     {
 
-        // Iterate through each of the buttons to be illuminated
-        for (j = 0; j < NumberOfLEDs; j++)
+        // Iterate through each of the led's in the neoPixelSizes array
+        for (j = 0; j < neoPixelSizes[num]; j++)
         {
             // If the current led (i) is equal to the led we want illuminated (j), illuminate led i
             if (i == neoPixelNote[num][j])
             {
                 LEDS[i][0] = 0;
                 LEDS[i][1] = 0;
-                LEDS[i][2] = 10; // all blue
+                LEDS[i][2] = 100; // all blue and brightness medium
             }
-
-//            if (neoPixelNote[num][j] == 50)
-//            {
-//                i = 50;
-//            }
         }
     }
 
+    // Iterate through each of the LED's to turn on, only nonzero values get activated
     for (i = 0; i < NumberOfLEDs; i++)
     {
         NeoPixelDataTransfer(LEDS[i][0], LEDS[i][1], LEDS[i][2]);
