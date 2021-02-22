@@ -25,9 +25,9 @@ extern void WriteNeopixelsToDisplay(void);
  ******************************************************************************/
 
 #define NumberOfLEDs 50
-#define DelayTime 5000000
-#define NeoPixelDataOutSet P1->OUT=P1->OUT | 0b01000000;
-#define NeoPixelDataOutClear P1->OUT=P1->OUT & 0b10111111;
+#define DelayTime 5000
+#define NeoPixelDataOutSet P1->OUT = P1->OUT | 0b01000000;
+#define NeoPixelDataOutClear P1->OUT = P1->OUT & 0b10111111;
 
 char LEDS[NumberOfLEDs][3];
 

@@ -40,16 +40,16 @@ void NeopixelSetup(void)
 //    MAP_FlashCtl_setWaitState(FLASH_BANK1, 2);
 //    MAP_CS_startHFXT(false);
 //
-//    /* Initializing MCLK to HFXT (effectively 48MHz) */
-//    MAP_CS_initClockSignal(CS_MCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_1);
-//
-//    /*Timer A0 uses SMCLK */
-//    MAP_CS_initClockSignal(CS_SMCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_1);
-//
-//    /* Timer A1 clock source set up at 128kHz. Timer overflow occurs at 0.5 Second*/
-//    MAP_CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
-//    MAP_CS_initClockSignal(CS_ACLK, CS_REFOCLK_SELECT, CS_CLOCK_DIVIDER_1);
-//
+    /* Initializing MCLK to HFXT (effectively 48MHz) */
+    MAP_CS_initClockSignal(CS_MCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_1);
+
+    /*Timer A0 uses SMCLK */
+    MAP_CS_initClockSignal(CS_SMCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_1);
+
+    /* Timer A1 clock source set up at 128kHz. Timer overflow occurs at 0.5 Second*/
+    MAP_CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
+    MAP_CS_initClockSignal(CS_ACLK, CS_REFOCLK_SELECT, CS_CLOCK_DIVIDER_1);
+
 //    smclock = CS_getSMCLK();
 }
 
@@ -103,7 +103,6 @@ void NeoPixelDataTransfer(char Green, char Red, char Blue)
         {
             NeoPixelDataOutSet
             NeoPixelDataOutSet
-            ;
             NeoPixelDataOutClear
         }   //end if
     }   //end for
@@ -118,14 +117,14 @@ void WriteNeopixelsToDisplay(void)
     {
 
         // Iterate through each of the buttons to be illuminated
-        for (j = 0; j < sizeof(LEDS_addressed); j++)
+        for (j = 0; j < 14; j++)
         {
             // If the current led (i) is equal to the led we want illuminated (j), illuminate led i
             if (i == LEDS_addressed[j])
             {
                 LEDS[i][0] = 0;
                 LEDS[i][1] = 0;
-                LEDS[i][2] = 255; // all blue
+                LEDS[i][2] = 20; // all blue
             }
         }
     }
@@ -136,7 +135,7 @@ void WriteNeopixelsToDisplay(void)
     }
 
     // delay
-    for (i = 0; i < 5000; i++)
+    for (i = 0; i < 50; i++)
         ;
 }
 

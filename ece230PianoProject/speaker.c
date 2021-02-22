@@ -126,9 +126,13 @@ void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note)
     if (edges[buttonNum])
     {
         //If the button is pushed, load the note value.
+
+        //The note value is multiplied by 4 to
+        //make up for the neopixel clock configuration
+        //increasing the clock speed by 4
         MAP_Timer_A_setCompareValue(TIMER_A0_BASE,
         TIMER_A_CAPTURECOMPARE_REGISTER_0,
-                                    note);
+                                    4*note);
         MAP_GPIO_interruptEdgeSelect(port, pin,
         GPIO_LOW_TO_HIGH_TRANSITION);
         edges[buttonNum] = false;

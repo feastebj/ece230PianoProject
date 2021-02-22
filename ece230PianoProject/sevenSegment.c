@@ -42,7 +42,7 @@ void SevenSegmentConfig(void)
     }
 
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN7);
-    GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN6);
+    GPIO_setAsOutputPin(GPIO_PORT_P3, GPIO_PIN6);
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN5);
 
     /* Configuring Timer_A1 for Up Down Mode */
@@ -119,7 +119,7 @@ void WriteToDigit(int num)
 void CycleDisplayDigits(void)
 {
     volatile uint32_t delay = 0;
-    for (delay = 5000; delay > 0; delay--)
+    for (delay = 3000; delay > 0; delay--)
     {
 
     }
@@ -134,19 +134,19 @@ void DisplayDigit(int num)
     if (num == 0)
     {
         GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN7);
-        GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN6);
+        GPIO_setOutputHighOnPin(GPIO_PORT_P3, GPIO_PIN6);
         GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN5);
     }
     else if (num == 1)
     {
         GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN7);
-        GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN6);
+        GPIO_setOutputLowOnPin(GPIO_PORT_P3, GPIO_PIN6);
         GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN5);
     }
     else if (num == 2)
     {
         GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN7);
-        GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN6);
+        GPIO_setOutputHighOnPin(GPIO_PORT_P3, GPIO_PIN6);
         GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN5);
     }
 }
