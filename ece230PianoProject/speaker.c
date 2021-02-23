@@ -26,7 +26,7 @@ NOTEE3,
                                            NOTEG3, NOTEG3_, NOTEA3,
                                            NOTEA3_,
                                            NOTEB3 };
-bool edges[10] = { true, true, true, true, true, true, true, true, true, true };
+bool edges[12] = { true, true, true, true, true, true, true, true, true, true, true, true };
 
 //static int noteIndex = 0;
 

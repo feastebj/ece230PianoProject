@@ -85,6 +85,19 @@ void PORT5_IRQHandler(void)
 }
 
 /*
+ * This handler manages the buttons on
+ * Port 3.
+ *
+ * See Port3Handler() in buttons.c
+ */
+void PORT3_IRQHandler(void)
+{
+    uint32_t status = MAP_GPIO_getEnabledInterruptStatus(GPIO_PORT_P3);
+    MAP_GPIO_clearInterruptFlag(GPIO_PORT_P3, status);
+    Port3Handler(status);
+}
+
+/*
  * This handler updates the seven segment
  * display.
  *

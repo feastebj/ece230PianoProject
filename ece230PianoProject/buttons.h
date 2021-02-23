@@ -18,6 +18,7 @@ extern "C"
  ******************************************************************************/
 //extern void interruptHandler(int port, uint_t gpioArray);
 extern void ButtonsConfig(void);
+extern void Port3Handler(uint32_t pin);
 extern void Port5Handler(uint32_t pin);
 extern void Port2Handler(uint32_t pin);
 

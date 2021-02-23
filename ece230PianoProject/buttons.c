@@ -17,6 +17,7 @@
 
 #define PORT2_PIN_NUM 4
 #define PORT5_PIN_NUM 6
+#define PORT3_PIN_NUM 2
 
 uint16_t portTwoButtonsArray[PORT2_PIN_NUM] = { GPIO_PIN3, GPIO_PIN5, GPIO_PIN6,
 GPIO_PIN7 };
@@ -26,6 +27,8 @@ GPIO_PIN2,
                                                  GPIO_PIN4,
                                                  GPIO_PIN6,
                                                  GPIO_PIN7 };
+
+uint16_t portThreeButtonsArray[PORT3_PIN_NUM] = { GPIO_PIN2, GPIO_PIN3 };
 
 //Button 0  -> C    -> 2.7  -> 40
 //Button 1  -> C#   -> 2.6  -> 39
@@ -37,8 +40,8 @@ GPIO_PIN2,
 //Button 7  -> G    -> 5.0  -> 13
 //Button 8  -> G#   -> 5.2  -> 12
 //Button 9  -> A    -> 5.4  -> 29
-//Button 10 -> A#
-//Button 11 -> B
+//Button 10 -> A#   -> 3.2  -> 37
+//Button 11 -> B    -> 3.3  -> 36
 
 void ButtonsConfig(void)
 {
@@ -62,8 +65,19 @@ void ButtonsConfig(void)
         MAP_GPIO_enableInterrupt(GPIO_PORT_P5, portFiveButtonsArray[j]);
     }
 
+    // Port 6 Button Configuration
+    int k;
+    for (k = 0; k < PORT3_PIN_NUM; k++)
+    {
+        MAP_GPIO_setAsInputPinWithPullUpResistor(GPIO_PORT_P3,
+                                                 portThreeButtonsArray[k]);
+        MAP_GPIO_clearInterruptFlag(GPIO_PORT_P3, portThreeButtonsArray[k]);
+        MAP_GPIO_enableInterrupt(GPIO_PORT_P3, portThreeButtonsArray[k]);
+    }
+
     MAP_Interrupt_enableInterrupt(INT_PORT2);
     MAP_Interrupt_enableInterrupt(INT_PORT5);
+    MAP_Interrupt_enableInterrupt(INT_PORT3);
 
 }
 
@@ -155,4 +169,20 @@ void Port2Handler(uint32_t pin)
         //Plays D#
         ChangeNote(GPIO_PORT_P2, GPIO_PIN3, 3, NOTED3_);
     }
+}
+
+void Port3Handler(uint32_t pin)
+{
+    if (pin & GPIO_PIN3)
+        {
+            //Button 11
+            //Plays Bb
+            ChangeNote(GPIO_PORT_P3, GPIO_PIN3, 11, NOTEA3_);
+        }
+        else if (pin & GPIO_PIN2)
+        {
+            //Button 10
+            // Plays B
+            ChangeNote(GPIO_PORT_P3, GPIO_PIN2, 10, NOTEB3);
+        }
 }

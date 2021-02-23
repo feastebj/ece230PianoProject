@@ -119,7 +119,7 @@ void WriteToDigit(int num)
 void CycleDisplayDigits(void)
 {
     volatile uint32_t delay = 0;
-    for (delay = 3000; delay > 0; delay--)
+    for (delay = 2000; delay > 0; delay--)
     {
 
     }
