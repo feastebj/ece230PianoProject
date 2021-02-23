@@ -13,6 +13,7 @@
 #include <stdbool.h>
 
 #include "speaker.h"
+#include "neopixel.h"
 
 int CurrentNote = 0;
 
@@ -138,6 +139,7 @@ void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note)
         edges[buttonNum] = false;
 
         SetNote(note);
+        SetLetter(buttonNum);
     }
     else
     {
@@ -150,6 +152,7 @@ void ChangeNote(uint8_t port, uint16_t pin, int buttonNum, double note)
         edges[buttonNum] = true;
 
         SetNote(REST);
+        SetLetter(12);
     }
 }
 

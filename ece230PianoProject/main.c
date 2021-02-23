@@ -94,7 +94,7 @@ void PORT5_IRQHandler(void)
 void TA1_0_IRQHandler(void)
 {
     WriteToDisplay(GetNote());
-    WriteNeopixelsToDisplay(3); // range from 0 to 11
+    WriteNeopixelsToDisplay(GetLetter()); // range from 0 to 11
 
     MAP_Timer_A_clearCaptureCompareInterrupt(TIMER_A1_BASE,
     TIMER_A_CAPTURECOMPARE_REGISTER_0);
